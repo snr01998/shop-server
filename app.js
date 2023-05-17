@@ -29,8 +29,8 @@ app.use(authJwt());
 
 
 
-const productsRouter = require('./routers/products');
-const Product = require('./models/product');
+//const productsRouter = require('./routers/products');
+//const Product = require('./models/product');
 //app.use(`${api}/products`,productsRouter)
 //app.use(`${api}/categories`,categoriesRouter)
 //app.use(`${api}/users`,usersRouter)
@@ -38,10 +38,18 @@ app.use(morgan('tiny'));
 
 //const Product = mongoose.model('Product',productSchema); 
 
-app.get('/',(req,res)=>{
-    res.send('hello ');
-})
 
+const categoriesRoutes = require('./routes/categories');
+const productsRoutes = require('./routes/products');
+const usersRoutes = require('./routes/users');
+const ordersRoutes = require('./routes/orders');
+
+//const api = process.env.API_URL;
+
+app.use(`${api}/categories`, categoriesRoutes);
+app.use(`${api}/products`, productsRoutes);
+app.use(`${api}/users`, usersRoutes);
+app.use(`${api}/orders`, ordersRoutes);
 
 mongoose.connect(process.env.CONNECTION_STRING,{useNewUrlParser:true,
 useUnifiedTopology:true,
